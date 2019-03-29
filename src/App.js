@@ -28,7 +28,14 @@ const App = () => {
         <section>
           <h2>Civilization Summary</h2>
           <ul>
-            {civArr.map((c, i) => (<li key={i} >{c}</li>))}
+            {civArr.map((c, i) => {
+              return (
+                <li key={i} 
+                  onClick={() => {setCivArr(civArr.filter((c, index) => { return index !== i }))}}>
+                  {c}
+                </li>
+              )
+            })}
           </ul>
         </section>
 
