@@ -1,9 +1,15 @@
 import React, { useState, useReducer, useEffect, useContext } from 'react';
+import { Store } from './Store';
+
+
 
 const App = () => {
   //creates a state var with default value of empty string
   const [civ, setCiv] = useState('');
-  const [civArr, setCivArr] = useState([]);
+  const [civArr, setCivArr] = useState(["England", "America", "Egypt", "Zulu"]);
+  
+  const store = React.useContext(Store);
+  console.log(store);
   return (
     <div>
       <header>
@@ -16,12 +22,12 @@ const App = () => {
           <form>
             <label>
               Enter a civilization:
-            <input type="text" value={civ} onChange={(event) => setCiv(event.target.value)} />
+            <input type="text" value={civ} name="name" onChange={(event) => setCiv(event.target.value)} />
             </label>
             <button type='submit' onClick={(e) => {
               e.preventDefault();
               setCivArr([...civArr, civ])
-            }}>Add Civilization</button>
+            }}>Add To List</button>
           </form>
         </section>
 
@@ -30,15 +36,14 @@ const App = () => {
           <ul>
             {civArr.map((c, i) => {
               return (
-                <li key={i} 
-                  onClick={() => {setCivArr(civArr.filter((c, index) => { return index !== i }))}}>
+                <li key={i}
+                  onClick={() => { setCivArr(civArr.filter((c, index) => { return index !== i })) }}>
                   {c}
                 </li>
               )
             })}
           </ul>
         </section>
-
       </body>
       <footer>
         Fun with Hooks
