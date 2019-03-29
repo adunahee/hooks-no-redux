@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
+import React, {useState, useReducer, useEffect, useContext} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
-  render() {
+const App = () => {
+    const [civ, setCiv ] = useState('');
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
+          <label>
+            Enter a civilization:
+            <input type="text" value={civ} onChange={(event) => setCiv(event.target.value)} />
+          </label>
           <a
             className="App-link"
             href="https://reactjs.org"
@@ -23,6 +24,5 @@ class App extends Component {
       </div>
     );
   }
-}
 
 export default App;
