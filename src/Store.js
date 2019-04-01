@@ -13,7 +13,7 @@ function reducer(state, action) {
         case("SET_LEADERS"):
             return {...state, leaders: action.payload};
         case("SET_CIVILIZATIONS"):
-            return {...state, civilzations: action.payload};
+            return {...state, civilizations: action.payload};
         default:
             return state;
     }

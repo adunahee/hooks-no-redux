@@ -1,27 +1,13 @@
-import React, { useState, useReducer, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 
-import { Store } from './Store';
-
-
+import MatchingLists from './MatchingLists';
+import MatchNotification from './MatchNotification';
 
 const App = () => {
   //creates a state var with default value of empty string
   const [civ, setCiv] = useState('');
   const [civArr, setCivArr] = useState(["England", "America", "Egypt", "Zulu"]);
-  //gives component access to the 'value' attr of provider
-  const { state, dispatch } = useContext(Store);
-  console.log(state);
-  //fetches leader data from webtask api
-  const fetchLeader = async () => {
-    try {
-      const data = await fetch('https://wt-928114e23c76a17d6cf12e0b21825ce0-0.sandbox.auth0-extend.com/hooks-civs/leaders');
-      const dataJSON = await data.json();
-      await dispatch({ type: 'SET_LEADERS', payload: dataJSON });
-      await console.log(state.leaders);
-    } catch (e) {
-      await console.log('Leaders could not be fetched.', e);
-    }
-  }
+
   return (
     <div>
       <header>
@@ -29,7 +15,7 @@ const App = () => {
       </header>
 
       <section>
-        <h2>Civilization Form</h2>
+        <h2>Playing with "State" using Civilization (huehue)</h2>
         <form>
           <label>
             Enter a civilization:
@@ -40,10 +26,8 @@ const App = () => {
             setCivArr([...civArr, civ])
           }}>Add To List</button>
         </form>
-      </section>
 
-      <section>
-        <h2>Civilization Summary</h2>
+        <h3>Civilization Summary</h3>
         <ul>
           {civArr.map((c, i) => {
             return (
@@ -55,13 +39,8 @@ const App = () => {
           })}
         </ul>
       </section>
-
-      <section>
-        <h2>Dispatch Actions</h2>
-        <button onClick={() => { dispatch({ type: 'SET_CIVILIZATIONS', payload: civArr }); }}> Add Civilizations to Store</button>
-        <button onClick={() => { setCivArr([]) }}>Clear Civ State </button>
-        <button onClick={() => { fetchLeader(); }}>Fetch Leaders</button>
-      </section>
+      <MatchNotification />
+      <MatchingLists />
 
       <footer>
         Fun with Hooks
