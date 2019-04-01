@@ -7,9 +7,9 @@ const App = () => {
   //creates a state var with default value of empty string
   const [civ, setCiv] = useState('');
   const [civArr, setCivArr] = useState(["England", "America", "Egypt", "Zulu"]);
-  
-  const store = React.useContext(Store);
-  console.log(store);
+  //gives component access to the 'value' attr of provider
+  const {state, dispatch} = useContext(Store);
+  console.log(state);
   return (
     <div>
       <header>
@@ -43,6 +43,11 @@ const App = () => {
               )
             })}
           </ul>
+        </section>
+        <section>
+          <h2>Dispatch Actions</h2>
+          <button onClick={() => { dispatch({ type: 'SET_CIVILIZATIONS', payload: civArr });}}> Add Civilizations to Store</button>
+          <button onClick={()=> { setCivArr([])}}>Clear Civ State </button>
         </section>
       </body>
       <footer>
