@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
+import MatchListItem from './MatchListItem';
+
 //this is our collection of reducers
 import { Store } from './Store';
 
@@ -38,15 +40,16 @@ const MatchingLists = () => {
             <h2>Can you successfully match the leaders with their civilization?</h2>
             <h3>Leaders</h3>
             <ul>
-                {leaders.map((l,i) => {
-                    return (<li key={i}>{l}</li>)
+                {leaders.map((l, i) => {
+                    return (<MatchListItem key={i} item={l} action='SET_SELECTED_LEADER'/>)
                 })}
             </ul>
             <ul>
-                {civilizations.map((c,i) => {
-                    return (<li key={i}>{c}</li>)
+                {civilizations.map((c, i) => {
+                    return (<MatchListItem key={i} item={c} action='SET_SELECTED_CIV'/>)
                 })}
             </ul>
+            <button>Guess</button>
         </div>
     )
 }

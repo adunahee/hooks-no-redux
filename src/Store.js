@@ -6,6 +6,8 @@ export const Store = React.createContext();
 const initialState = {
     leaders: [],
     civilizations: [],
+    selectedLeader: '', 
+    selectedCiv: '',
 };
 
 function reducer(state, action) {
