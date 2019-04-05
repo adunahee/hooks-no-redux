@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-
 import MatchingLists from './MatchingLists';
 import MatchNotification from './MatchNotification';
+import Footer from './Footer';
 
 const App = () => {
   //creates a state var with default value of empty string
@@ -43,9 +43,7 @@ const App = () => {
       <MatchNotification />
       <MatchingLists />
 
-      <footer>
-        Fun with Hooks
-      </footer>
+      <Footer />
 
     </div>
   );
