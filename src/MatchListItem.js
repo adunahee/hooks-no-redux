@@ -3,20 +3,21 @@ import React, { useState, useContext } from 'react';
 import { Store } from './Store';
 
 const MatchListItem = (props) => {
-    const { item } = props;
-    const [ selected, setSelected ] = useState(false);
+    const { item, guessObj } = props;
+    console.log(guessObj);
+    const { guess, setGuess } = guessObj;
     //sets styling when list item selected
     const selectedStyle = {};
-    if(selected) {
-        selectedStyle.color = 'green';
+    if(guess === item) {
+        selectedStyle.color = 'orange';
         selectedStyle.fontWeight = 'bold';
     }
-    const { store } = useContext(Store);
-    const { state, dispatch } = store;
+    const { state, dispatch } = useContext(Store);
+    const { leaders, civilizations } = state;
     const { selectedLeader, selectedCiv } = state;
 
     return (
-        <li style={selectedStyle} onClick={ () => {setSelected(!selected)}}>{item}</li>
+        <li style={selectedStyle} onClick={ () => {setGuess(item)}}>{item}</li>
     )
 }
 

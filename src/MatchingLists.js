@@ -11,6 +11,9 @@ const MatchingLists = () => {
         state.leaders.length === 0 && fetchLeader();
         state.civilizations.length === 0 && fetchCivs();
     })
+
+    const [leaderGuess, setLeaderGuess] = useState('');
+    const [civGuess, setCivGuess] = useState('');
     //gives component access to the 'value' attr of provider
     const { state, dispatch } = useContext(Store);
     const { leaders, civilizations } = state;
@@ -35,21 +38,37 @@ const MatchingLists = () => {
         }
     }
 
+    const compareGuess = () => {
+        const kongoCheck = (civGuess === 'Kongo' && leaderGuess === 'Mvemba Nzinga');
+        const usaCheck = (civGuess === 'America' && leaderGuess === 'Teddy Roosevelt');
+        const carthageCheck = (civGuess === 'Carthage' && leaderGuess === 'Dido');
+        if (kongoCheck || usaCheck || carthageCheck) {
+            alert('Correct!');
+            setCivGuess('');
+            setLeaderGuess('');
+        } else {
+            alert('Not quite. Try again!')
+        }
+    }
+
     return (
         <div>
             <h2>Can you successfully match the leaders with their civilization?</h2>
             <h3>Leaders</h3>
             <ul>
-                {leaders.map((l, i) => {
-                    return (<MatchListItem key={i} item={l} action='SET_SELECTED_LEADER'/>)
-                })}
+                {state.leaders.length > 0 &&
+                    leaders.map((l, i) => {
+                        return (<MatchListItem key={i} item={l} action='SET_SELECTED_LEADER' guessObj={{ guess: leaderGuess, setGuess: setLeaderGuess }} />)
+                    })}
             </ul>
+            <h3> Civilizations </h3>
             <ul>
-                {civilizations.map((c, i) => {
-                    return (<MatchListItem key={i} item={c} action='SET_SELECTED_CIV'/>)
-                })}
+                {state.civilizations.length > 0 &&
+                    civilizations.map((c, i) => {
+                        return (<MatchListItem key={i} item={c} action='SET_SELECTED_CIV' guessObj={{ guess: civGuess, setGuess: setCivGuess }} />)
+                    })}
             </ul>
-            <button>Guess</button>
+            <button onClick={() => { return compareGuess()}}>Guess</button>
         </div>
     )
 }
