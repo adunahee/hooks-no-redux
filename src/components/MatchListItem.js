@@ -7,13 +7,13 @@ const MatchListItem = (props) => {
     const { guess, setGuess } = guessObj;
     //sets styling when list item selected
     const selectedStyle = {};
-    if(guess === item) {
+    if (guess === item) {
         selectedStyle.color = 'orange';
         selectedStyle.fontWeight = 'bold';
     }
 
     return (
-        <li style={selectedStyle} onClick={ () => {setGuess(item)}}>{item}</li>
+        <li style={selectedStyle} onClick={() => { setGuess(item) }}>{item}</li>
     )
 }
 
